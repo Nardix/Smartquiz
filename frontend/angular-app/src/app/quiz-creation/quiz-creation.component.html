@@ -1,0 +1,80 @@
+<div class="min-h-screen flex items-center justify-center">
+  <div class="p-6 bg-white rounded-2xl shadow-md space-y-4">
+    <!-- Titolo e Textbox -->
+    <form [formGroup]="quizCreationForm" (ngSubmit)="createQuiz()">
+      <div>
+        <label for="title" class="block text-3xl font-medium text-gray-900"
+          >Titolo
+        </label>
+        <input
+          type="text"
+          formControlName="title"
+          id="title"
+          class="w-full p-2.5 mt-4 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500"
+          placeholder="Inserisci il titolo"
+          required
+        />
+        @if(submitted && quizCreationForm.controls.title.errors){
+          @if(quizCreationForm.controls.title.errors['required']){
+            <p class="form-error">Titolo richiesto</p>
+          }
+        }
+      </div>
+
+      <!-- Massimo numero di errori e Toggle -->
+      <div class="flex items-center justify-between mt-4">
+        <label for="max-errors" class="text-2xl font-medium text-gray-900 mr-4"
+          >Massimo numero di errori
+        </label>
+        <div class="flex items-center space-x-2">
+          <input
+            type="number"
+            formControlName="max_errors"
+            id="max-errors"
+            class="p-2.5 w-20 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500"
+            min="0"
+          />
+          <label class="inline-flex items-center">
+            <input
+              type="checkbox"
+              class="toggle-checkbox h-5 w-5 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+              [checked]="isMaxErrorsEnabled"
+              (change)="toggleMaxErrors($event)"
+            />
+            <span class="ml-2 text-xl text-gray-900">Attiva</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- Descrizione e Textarea con Markdown -->
+      <div class="mt-4">
+        <label
+          for="description"
+          class="block text-3xl font-medium text-gray-900"
+          >Descrizione</label
+        >
+        <textarea
+          formControlName="description"
+          id="description"
+          rows="8"
+          class="w-full p-2.5 mt-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500"
+          placeholder="Inserisci la descrizione"
+          required
+        ></textarea>
+        @if(submitted && quizCreationForm.controls.description.errors){
+          @if(quizCreationForm.controls.description.errors['required']){
+            <p class="form-error">Descrizione richiesta</p>
+          }
+        }
+      </div>
+
+      <!-- Bottone "Crea domande" -->
+      <button
+        type="submit"
+        class="mt-4 w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+      >
+        Crea domande
+      </button>
+    </form>
+  </div>
+</div>

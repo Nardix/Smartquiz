@@ -1,0 +1,99 @@
+<div class="min-h-screen flex items-center justify-center">
+    <div class="max-w-lg p-8 bg-white rounded-2xl shadow-md space-y-6 overflow-y-auto" style="max-height: 700px;">
+        @if(!noQuestionOnInit){
+            <form [formGroup]="questionForm" (ngSubmit)="nextQuestion()">
+                <!-- Domanda -->
+                <label class="block text-lg font-medium text-gray-900 text-center">
+                    {{ this.questionItem?.text }}
+                </label>
+            
+                <!-- Linea Separatrice -->
+                <hr class="border-t border-gray-300 my-4">
+            
+                <!-- Sezione delle Risposte -->
+                @if(isMultipleChoice){
+                    <div class="mb-4">
+                        <input
+                          type="radio"
+                          name="correctAnswer1"
+                          class="mr-2 h-5 w-5 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+                          [checked]="selectedOption === 0"
+                          (click)="selectedOption = 0"
+                        >
+                        <label class="text-lg font-medium text-gray-900 text-center">
+                            {{ this.questionItem?.answerText1 }}
+                        </label>
+                    </div>
+                    <div class="mb-4">
+                        <input
+                          type="radio"
+                          name="correctAnswer2"
+                          class="mr-2 h-5 w-5 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+                          [checked]="selectedOption === 1"
+                          (click)="selectedOption = 1"
+                        >
+                        <label class="text-lg font-medium text-gray-900 text-center">
+                            {{ this.questionItem?.answerText2 }}
+                        </label>
+                    </div>
+                    <div class="mb-4">
+                        <input
+                          type="radio"
+                          name="correctAnswer3"
+                          class="mr-2 h-5 w-5 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+                          [checked]="selectedOption === 2"
+                          (click)="selectedOption = 2"
+                        >
+                        <label class="text-lg font-medium text-gray-900 text-center">
+                            {{ this.questionItem?.answerText3 }}
+                        </label>
+                    </div>
+                    <div class="mb-4">
+                        <input
+                          type="radio"
+                          name="correctAnswer4"
+                          class="mr-2 h-5 w-5 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+                          [checked]="selectedOption === 3"
+                          (click)="selectedOption = 3"
+                        >
+                        <label class="text-lg font-medium text-gray-900 text-center">
+                            {{ this.questionItem?.answerText4 }}
+                        </label>
+                    </div>
+                }
+                    
+                <!-- Sezione Risposta Singola -->
+                @if(!isMultipleChoice){
+                    <textarea
+                        formControlName="textarea"
+                        class="w-full p-2.5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500"
+                        rows="4"
+                        placeholder="Inserisci la tua risposta qui..."
+                    ></textarea>
+                }
+            
+                <!-- Bottone Domanda Successiva -->
+                <div class="flex justify-center mt-6">
+                    <button
+                        type="submit"
+                        class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                    >
+                        Domanda Successiva
+                    </button>
+                </div>
+            </form>
+        }@else {
+            <label class="block text-lg font-medium text-gray-900 text-center">
+                Non e' stata creata nessuna domanda per questo quiz
+            </label>
+            <button
+                type="button"
+                (click)="returnToHomepage()"
+                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+            >
+                Homepage
+            </button>
+        }
+    </div>
+</div>
+  

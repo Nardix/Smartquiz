@@ -1,0 +1,153 @@
+<div class="min-h-screen flex items-center justify-center">
+  <div class="max-w-lg p-8 bg-white rounded-2xl shadow-md space-y-6">
+    <form [formGroup]="questionCreationForm" (ngSubmit)="handleQuestionCreation()">
+      <!-- Inserisci Domanda -->
+      <div>
+        <label for="question" class="block text-xl font-medium text-gray-900">
+          Inserisci domanda numero {{this.questionNumber}}
+        </label>
+        <input
+          type="text"
+          formControlName="question"
+          id="question"
+          class="w-full p-3 mt-2 mb-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500"
+          placeholder="Inserisci la domanda"
+          required
+        />
+        @if(submitted && questionCreationForm.controls.question.errors){
+          @if(questionCreationForm.controls.question.errors['required']){
+            <p class="form-error">Inserisci la domanda</p>
+          }
+        }
+      </div>
+      
+      <!-- Toggle Risposta Multipla/Risposta Aperta -->
+      <div class="mt-2 flex items-center justify-between">
+        <label class="block text-sm mr-2 font-medium text-gray-900">Tipo di Risposta</label>
+        <div class="flex items-center space-x-2">
+          <label class="inline-flex items-center">
+            <input
+              type="radio"
+              name="responseType"
+              value="multipla"
+              class="toggle-radio h-5 w-5 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+              [checked]="isMultipleChoice"
+              (click)="setMultipleChoice(true)"
+            >
+            <span class="ml-2 text-sm text-gray-900">Risposta Multipla</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input
+              type="radio"
+              name="responseType"
+              value="aperta"
+              class="toggle-radio h-5 w-5 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+              [checked]="!isMultipleChoice"
+              (click)="setMultipleChoice(false)"
+            >
+            <span class="ml-2 text-sm text-gray-900">Risposta Aperta</span>
+          </label>
+        </div>
+      </div>
+      
+      <!-- Linea Separatoria -->
+      <hr class="my-4 border-gray-300">
+
+      <!-- Opzioni Risposta Multipla -->
+      @if(isMultipleChoice){
+        <label class="block text-md mb-2 font-medium text-gray-900">Definisci e seleziona la risposta corretta</label>
+        <div class="mb-4">
+          <input
+            type="radio"
+            name="correctAnswer1"
+            class="mr-2 h-5 w-5 text-blue-600 focus:ring-blue-500 border-gray-300 rounded ml-2"
+            [checked]="selectedOption === 0"
+            (click)="selectedOption = 0"
+          >
+          <input
+            type="text"
+            placeholder="Opzione 1"
+            class="flex-1 p-3 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500"
+            formControlName="answerText1"
+          />
+        </div>
+        <div class="mb-4">
+          <input
+            type="radio"
+            name="correctAnswer2"
+            class="mr-2 h-5 w-5 text-blue-600 focus:ring-blue-500 border-gray-300 rounded ml-2"
+            [checked]="selectedOption === 1"
+            (click)="selectedOption = 1"
+          >
+          <input
+            type="text"
+            placeholder="Opzione 2"
+            class="flex-1 p-3 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500"
+            formControlName="answerText2"
+          />
+        </div>
+        <div class="mb-4">
+          <input
+            type="radio"
+            name="correctAnswer3"
+            class="mr-2 h-5 w-5 text-blue-600 focus:ring-blue-500 border-gray-300 rounded ml-2"
+            [checked]="selectedOption === 2"
+            (click)="selectedOption = 2"
+          >
+          <input
+            type="text"
+            placeholder="Opzione 3"
+            class="flex-1 p-3 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500"
+            formControlName="answerText3"
+          />
+        </div>
+        <div class="mb-4">
+          <input
+            type="radio"
+            name="correctAnswer4"
+            class="mr-2 h-5 w-5 text-blue-600 focus:ring-blue-500 border-gray-300 rounded ml-2"
+            [checked]="selectedOption === 3"
+            (click)="selectedOption = 3"
+          >
+          <input
+            type="text"
+            placeholder="Opzione 4"
+            class="flex-1 p-3 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500"
+            formControlName="answerText4"
+          />  
+        </div>
+      }
+      
+
+      <!-- Risposta Aperta -->
+      @if(!isMultipleChoice){
+        <label for="openResponse" class="block text-sm font-medium text-gray-900">Risposta:</label>
+        <textarea
+          id="openResponse"
+          formControlName="openResponse"
+          rows="4"
+          class="w-full p-3 mt-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500"
+          placeholder="Inserisci la risposta aperta"
+        ></textarea>
+      }
+        
+      <!-- Bottone Conferma -->
+      <div>
+        <button
+          type="submit"
+          class="mt-5 w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-3 text-center"
+        >
+          Crea la domanda
+        </button>
+        <hr class="my-4 border-gray-300">
+        <button
+          type="button"
+          class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-3 text-center"
+          (click)="onClickQuizConclusion()"
+        >
+          Concludi creazione del quiz
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

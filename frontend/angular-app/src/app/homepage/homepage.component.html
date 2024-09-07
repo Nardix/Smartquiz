@@ -1,0 +1,61 @@
+<div class="min-h-screen flex flex-col items-center justify-center">
+    <div class="p-3 bg-white rounded-lg shadow-md mb-20">
+      <h1 class="text-7xl font-bold text-gray-900">SmartQuiz</h1> 
+    </div>
+    <div class="max-w-md p-6 bg-white rounded-lg shadow-md">
+      <!-- Bottone "Crea il quiz" -->
+      @if(this.authService.isUserAuthenticated()) {
+        <button
+          type="button"
+          class="w-full text-white bg-green-600 hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-md px-5 py-2.5 text-center mb-4"
+          (click)="redirectToQuizCreation()"
+        >
+          Crea il quiz
+        </button>
+      }
+      @else {
+        <button
+          type="button"
+          class="w-full text-white bg-green-600 hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-md px-5 py-2.5 text-center mb-4"
+          (click)="redirectToLogin()"
+        >
+          Effettua il login per creare il quiz
+        </button>
+      }
+
+      <!-- Linea separatoria -->
+      <hr class="border-gray-300 my-4" />
+
+      <!-- Label e casella di testo per "Inserisci link" -->
+      <form [formGroup]="homepageForm" (ngSubmit)="redirectToQuiz()">
+        <div class="mb-4">
+          <label
+            for="link"
+            class="mb-2 block text-xl font-medium text-gray-900 dark:text-white"
+            >Partecipa ad un quiz inserendone il codice</label
+          >
+          <input
+            type="text"
+            formControlName="link"
+            id="link"
+            class="w-full p-3 mt-2 mb-2 bg-gray-50 border border-gray-300 text-gray-900 text-md rounded-lg focus:ring-blue-500 focus:border-blue-500"
+            placeholder="Inserisci il codice del quiz"
+            required
+          />
+          @if(submitted && homepageForm.controls.link.errors){
+            @if(homepageForm.controls.link.errors['required']){
+              <p class="form-error">Bisogna inserire un codice di un quiz</p>
+            }
+          }
+        </div>
+
+        <!-- Bottone per confermare -->
+        <button
+          type="submit"
+          class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-md px-5 py-2.5 text-center"
+        >
+          Conferma
+        </button>
+      </form>
+    </div>
+</div>

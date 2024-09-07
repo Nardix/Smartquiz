@@ -1,0 +1,33 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import 'ngx-toastr/toastr';
+
+body {
+  background-image: url('assets/img.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.toast-success {
+  @apply bg-blue-500;
+}
+.toast-error {
+  background-color: #BD362F;
+}
+.toast-info {
+  background-color: #2F96B4;
+}
+.toast-warning {
+  background-color: #F89406;
+}
+
+a.link {
+  @apply underline text-blue-600 hover:text-blue-700 visited:text-blue-800
+}
+
+.form-error{
+  @apply text-red-600 dark:text-red-400 text-sm pt-2;
+}
