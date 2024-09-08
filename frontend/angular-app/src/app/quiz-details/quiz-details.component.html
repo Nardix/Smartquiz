@@ -1,17 +1,16 @@
 <div class="min-h-screen flex items-center justify-center">
-    <div class="max-w-lg p-8 bg-white rounded-2xl shadow-md space-y-6">
-      
+    <div class="max-w-lg p-8 bg-white rounded-2xl shadow-md space-y-6 overflow-y-auto" style="max-height: 700px;">
+
       @if(scoreItems) {
         <!-- Titolo con Utente e Punteggio -->
         <div class="flex justify-between mb-4">
           <span class="text-lg font-medium text-gray-900 mr-5">Utente</span>
           <span class="text-lg font-medium text-gray-900">Punteggio</span>
         </div>
-  
+
         <!-- Linea di Separazione -->
         <hr class="mb-4">
-  
-      
+
         <!-- Iterazione sui punteggi presenti in listascores -->
         <div *ngFor="let score of scoreItems" class="flex justify-between py-2">
           <span class="text-gray-700">{{ score.name }}</span>
@@ -22,7 +21,7 @@
           <span class="text-gray-700">Nessun punteggio presente</span>
         </div>
       }
-      
+
       <div class="mt-6">
         <button
           (click)="goToQuizzes()"
@@ -31,6 +30,6 @@
           Ritorna ai quiz
         </button>
       </div>
-  
+
     </div>
 </div>
