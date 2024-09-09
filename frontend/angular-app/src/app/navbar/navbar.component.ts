@@ -11,21 +11,15 @@ import { AuthService } from '../_services/auth/auth.service';
 })
 export class NavbarComponent {
 
-  isOpen = false; //determines whether the mobile navbar is toggled or not
+  isOpen = false;
   isDropdownOpen = false;
   
   authService = inject(AuthService);
 
-  /**
-   * Handles user click on the navbar menu toggle on small screens
-   */
   toggle() {
     this.isOpen = !this.isOpen;
   }
 
-  /**
-   * Closes the toggled navbar when a user clicks on a link
-   */
   handleNavigationClick(){
     this.isOpen = false;
   }

@@ -15,7 +15,7 @@ export const appConfig: ApplicationConfig = {
       newestOnTop: true,
     }),
     provideHttpClient(
-      withFetch(), //use the Fetch API instead of XMLHttpRequests
+      withFetch(),
       withInterceptors([authInterceptor])
     )
   ]
