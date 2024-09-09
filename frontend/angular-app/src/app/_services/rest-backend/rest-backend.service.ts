@@ -9,7 +9,7 @@ import { ScoreItem } from './score-item.type';
   providedIn: 'root'
 })
 export class RestBackendService {
-  url = "http://localhost:3000" //da docker "http://backend:3000"
+  url = "http://localhost:3000"
   constructor(private http: HttpClient) {}
 
   httpOptions = {
