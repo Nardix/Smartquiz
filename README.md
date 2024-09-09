@@ -6,7 +6,9 @@ per avviare l'applicazione posizionarsi dove e' presente il file docker-compose.
 Sono presenti due account dimostrativi: 
 
 nome utente: antonio
+
 password: anto
 
 nome utente: antonio1
+
 password: anto
